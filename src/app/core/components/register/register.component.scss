@@ -1,0 +1,25 @@
+
+.registerCard {
+  width: 70vw;
+}
+
+.profilePic {
+  min-height: 30vh;
+}
+
+form {
+  margin-top: 5%;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-top: 2%;
+}
+
+.actionButtionDiv {
+  margin-top: 2%;
+}
+
+.actionButtionDiv > :first-child {
+  margin-right: 2%;
+}
