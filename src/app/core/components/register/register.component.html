@@ -1,6 +1,10 @@
 <div fxLayout="row" fxLayoutAlign="center center">
   <mat-card class="registerCard">
-    <mat-horizontal-stepper labelPosition="bottom" #stepper>
+    <mat-stepper
+      labelPosition="bottom"
+      [orientation]="(stepperOrientation | async)!"
+      #stepper
+    >
       <mat-card-content>
         <mat-step
           [stepControl]="generalGroup"
@@ -381,6 +385,6 @@
           <mat-icon>manage_accounts</mat-icon>
         </ng-template>
       </mat-card-content>
-    </mat-horizontal-stepper>
+    </mat-stepper>
   </mat-card>
 </div>
