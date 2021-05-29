@@ -10,11 +10,21 @@
   >
     <mat-toolbar color="primary">IOT-Blends</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a
+        mat-list-item
+        (click)="navigateTo('products'); navToggle()"
+        routerLinkActive="active"
+        >Dashboard</a
+      >
+      <a
+        mat-list-item
+        (click)="navigateTo('products/productList'); navToggle()"
+        routerLinkActive="active"
+        >Products</a
+      >
     </mat-nav-list>
   </mat-sidenav>
+
   <mat-sidenav-content>
     <mat-toolbar
       color="primary"
@@ -26,12 +36,12 @@
           type="button"
           aria-label="Toggle sidenav"
           mat-icon-button
-          (click)="drawer.toggle()"
-          *ngIf="isHandset$ | async"
+          (click)="navToggle()"
+          *ngIf="(isHandset$ | async) || isSideNavVisible"
         >
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <span *ngIf="isHandset$ | async">IOT-Blends</span>
+        <span *ngIf="(isHandset$ | async) || isSideNavVisible">IOT-Blends</span>
       </div>
       <div>
         <button
@@ -50,7 +60,7 @@
     <mat-toolbar color="primary" *ngIf="!(isUserLoggedIn$ | async)">
       <mat-toolbar-row fxLayoutAlign="space-between center">
         <div>
-          <button
+          <!-- <button
             type="button"
             aria-label="Toggle sidenav"
             mat-icon-button
@@ -58,7 +68,7 @@
             *ngIf="(isHandset$ | async) && (isUserLoggedIn$ | async)"
           >
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-          </button>
+          </button> -->
           <span (click)="navigateTo('')" routerLinkActive="active"
             >IOT Connector</span
           >
@@ -119,7 +129,6 @@
         </button>
       </mat-toolbar-row>
     </mat-toolbar>
-
     <!-- Add Content Here -->
     <ng-content></ng-content>
   </mat-sidenav-content>

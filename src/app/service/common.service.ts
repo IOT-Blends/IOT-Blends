@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CommonService {
-  private isUserLoggedInSub = new BehaviorSubject<boolean>(false);
+  private isUserLoggedInSub = new BehaviorSubject<boolean>(true);
   isUserLoggedIn$: Observable<boolean> = this.isUserLoggedInSub.asObservable();
 
   constructor() {}

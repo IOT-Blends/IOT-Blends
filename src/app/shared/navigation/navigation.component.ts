@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { CommonService } from 'src/app/service/common.service';
 import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-navigation',
@@ -12,10 +13,19 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
   isUserLoggedIn$!: Observable<any>;
+  isSideNavVisible: boolean = true;
+  @ViewChild('drawer') public sidenav!: MatSidenav;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
       map((result) => result.matches),
+      tap((result) => {
+        if (!result) {
+          this.isSideNavVisible = false;
+        } else {
+          this.isSideNavVisible = true;
+        }
+      }),
       shareReplay()
     );
 
@@ -44,5 +54,10 @@ export class NavigationComponent implements OnInit {
         this.router.navigate([`/${path}`]);
         break;
     }
+  }
+
+  navToggle() {
+    this.sidenav.toggle();
+    this.isSideNavVisible = !this.isSideNavVisible;
   }
 }
